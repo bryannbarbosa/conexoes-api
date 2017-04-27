@@ -26,22 +26,37 @@ function signup( $informations ) {
   $cpf = '';
   $email = '';
   $password = '';
+  $count = 0;
 
   if( fields( $informations, $fields ) ) {
 
-    if( !array_filter ( $informations ) ) {
+    foreach ( $informations as $information ) {
+
+      if($information != null) {
+        $count++;
+      }
+
+    }
+
+    if( $count < count( $informations ) ) {
+
       return array(
-        'response' => 'All values cannot be empty'
+        'response' => 'Any value can be null'
       );
+
     } else {
+
       return array(
-        'response' => 'All values are ok!'
+        'response' => 'Ok!'
       );
+
     }
 
   } else {
+
     return array(
       'response' => 'All fields are required'
     );
+
   }
 }
