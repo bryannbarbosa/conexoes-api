@@ -2,6 +2,7 @@
 
 require 'vendor/autoload.php';
 require 'database/env.php';
+require 'models/default.php';
 
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
@@ -50,7 +51,7 @@ $app->get('/get/{name}', function($request, $response, $args) {
 $app->post('/signup', function($request, $response, $args) {
 
   $data = $request->getParsedBody();
-  return $response->withJson($data);
+  return $response->withJson(signup($data));
 
 });
 
