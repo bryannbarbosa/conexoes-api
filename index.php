@@ -2,7 +2,7 @@
 
 require 'vendor/autoload.php';
 require 'database/env.php';
-require 'models/default.php';
+require 'models/autoload.php';
 
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
