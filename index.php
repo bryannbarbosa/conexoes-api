@@ -15,7 +15,8 @@ $handler['notFoundHandler'] = function ($handler) {
         return $handler['response']
             ->withStatus(404)
             ->withHeader('Content-Type', 'application/json')
-            ->withJson(array('Route not found'));
+            ->withJson(array(
+              'response' => 'Route not found'));
 
     };
 };

@@ -15,8 +15,10 @@ function signup( $informations ) {
 
     foreach ( $informations as $information ) {
 
-      if($information != null) {
+      if( $information != null ) {
+
         $count++;
+
       }
 
     }
@@ -29,8 +31,27 @@ function signup( $informations ) {
 
     } else {
 
+      $hash = hash("sha256", $informations['password']);
+
+      $informations['password'] = $hash;
+
+      global $DB;
+
+      $DB->insert("users", [
+	       "cpf" => $informations['cpf'],
+	       "email" => $informations['email'],
+	       "password" => $informations['password']
+      ]);
+
+      $id = $DB->id();
+
       return array(
-        'response' => 'Ok!'
+        "id" => $id,
+        "cpf" => $informations['cpf'],
+        "email" => $informations['email'],
+        "password" => $informations['password'],
+        "auth_type" => $informations['auth_type'],
+        'response' => 'Account registered with sucess'
       );
 
     }
