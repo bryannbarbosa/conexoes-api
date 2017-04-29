@@ -34,12 +34,9 @@ $app->get('/', function($request, $response) {
 
   global $DB;
 
-  $data = $DB->select("users", [
-	"id",
-	"name"
-	]);
-
-  return $response->withJson($data);
+  return $response->withJson(array(
+    'response' => 'Welcome to our API!'
+  ));
 
 });
 
@@ -54,6 +51,11 @@ $app->post('/signup', function($request, $response, $args) {
   $data = $request->getParsedBody();
   return $response->withJson(signup($data));
 
+});
+
+$app->post('/selection', function ($request, $response, $args){
+  $data = $request->getParsedBody();
+  return $response->withJson(giveAnswer($data));
 });
 
 $app->run();
