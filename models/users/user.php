@@ -1,19 +1,20 @@
 <?php
 
-require 'helpers.php';
+require($_SERVER['DOCUMENT_ROOT']."/models/helpers.php");
 
 function signup( $informations ) {
 
   // Fields for signup
 
-  $fields = ['cpf', 'email', 'password', 'auth_type'];
+  $fields = ['cpf', 'name', 'email', 'password', 'user_type'];
 
   // Variables for inserting information from the form
 
   $cpf = '';
+  $name = '';
   $email = '';
   $password = '';
-  $auth_type = '';
+  $user_type = '';
   $count = 0;
 
   // Verify if all required fields are present
@@ -43,11 +44,12 @@ function signup( $informations ) {
       $cpf = $informations['cpf'];
       $email = $informations['email'];
       $password = $informations['password'];
-      $auth_type = $informations['auth_type'];
+      $name = $informations['name'];
+      $user_type = $informations['user_type'];
 
       // Encrypting password for security
 
-      $hash = hash("sha256", $password);
+      $hash = hash("sha512", $password);
 
       $password = $hash;
 
@@ -80,12 +82,13 @@ function signup( $informations ) {
   	      "cpf" => $cpf,
   	      "email" => $email,
   	      "password" => $password,
-          "auth_type" => $auth_type
+          "full_name" => $name,
+          "user_type" => $user_type
           ]);
 
       }
 
-      if(count($insert) == 0) {
+      if($insert == 0) {
 
         return array(
           'response' => 'Error in register account'
