@@ -1,20 +1,18 @@
 <?php
 
-function signup( $informations ) {
+function signup_student( $informations ) {
 
   // Fields for signup
 
-  $fields = ['document', 'document_type', 'name',
-  'password', 'email', 'user_type'];
+  $fields = ['document', 'name',
+  'password', 'email'];
 
   // Variables for inserting information from the form
 
   $document = '';
-  $document_type = '';
   $name = '';
   $password = '';
   $email = '';
-  $user_type = '';
   $count = 0;
 
   // Verify if all required fields are present
@@ -42,11 +40,9 @@ function signup( $informations ) {
       // Inserting information of form to variables
 
       $document = $informations['document'];
-      $document_type = $informations['document_type'];
       $password = $informations['password'];
       $name = $informations['name'];
       $email = $informations['email'];
-      $user_type = $informations['user_type'];
 
       // Encrypting password for security
 
@@ -60,11 +56,10 @@ function signup( $informations ) {
 
       // Verify if already has an account in Database
 
-      $record = $DB->select("users", "*", [
+      $record = $DB->select("students", "*", [
         "OR" => [
         "email" => $email,
         "document" => $document,
-        "document_type" => $document_type
         ]
       ]);
 
@@ -80,13 +75,11 @@ function signup( $informations ) {
 
         // Inserting data from form to Database
 
-        $insert = $DB->insert("users", [
+        $insert = $DB->insert("students", [
   	      "document" => $document,
-          "document_type" => $document_type,
   	      "email" => $email,
   	      "password" => $password,
-          "name" => $name,
-          "user_type" => $user_type
+          "name" => $name
           ]);
 
       }

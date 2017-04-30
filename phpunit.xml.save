@@ -1,0 +1,5 @@
+<phpunit >
+    <testsuite name="appconexao" >
+        <directory>tests</directory>
+    </testsuite>
+</phpunit>

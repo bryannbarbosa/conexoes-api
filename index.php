@@ -32,8 +32,6 @@ $app->add(function ($request, $response, $next) {
 
 $app->get('/', function($request, $response) {
 
-  global $DB;
-
   return $response->withJson(array(
     'response' => 'Welcome to our API!'
   ));
@@ -49,13 +47,23 @@ $app->get('/get/{name}', function($request, $response, $args) {
 $app->post('/signup', function($request, $response, $args) {
 
   $data = $request->getParsedBody();
-  return $response->withJson(signup($data));
+  return $response->withJson(signup_student($data));
 
 });
 
 $app->post('/selection', function ($request, $response, $args){
+
   $data = $request->getParsedBody();
   return $response->withJson(giveAnswer($data));
+
 });
+
+$app->get('/questions/{type}/all', function($request, $response, $args) {
+
+  return $response->withJson(getQuestions($args['type']));
+
+});
+
+
 
 $app->run();
