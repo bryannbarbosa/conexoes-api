@@ -26,7 +26,10 @@ $app = new \Slim\App($handler);
 $app->add(function ($request, $response, $next) {
 
 	$response = $next($request, $response);
-	return $response->withHeader('Content-Type', 'application/json');
+	return $response->withHeader('Content-Type', 'application/json')
+  ->withHeader('Access-Control-Allow-Origin', '*')
+  ->withHeader('Access-Control-Allow-Headers', array('Content-Type', 'X-Requested-With', 'Authorization'))
+  ->withHeader('Access-Control-Allow-Methods', array('GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'));
 
 });
 
