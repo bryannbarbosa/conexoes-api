@@ -5,10 +5,12 @@ function getQuestions($type) {
   global $DB;
 
   $record = $DB->select("questions", "*", [
-    "OR" => [
-    "type" => $type,
-    "active" => 'true'
-    ]
+    "AND" => [
+		"OR" => [
+			"type" => $type
+		],
+		"active" => "true"
+	]
   ]);
 
   return $record;

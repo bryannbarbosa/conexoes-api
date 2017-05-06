@@ -50,8 +50,8 @@ $app->get('/get/{name}', function($request, $response, $args) {
 $app->post('/signup', function($request, $response, $args) {
 
   $data = $request->getParsedBody();
-  return $response->withJson(signup_student($data));
-
+  // return $response->withJson(signup_student($data));
+  return $response->withJson($data);
 });
 
 $app->post('/selection', function ($request, $response, $args){
@@ -62,9 +62,8 @@ $app->post('/selection', function ($request, $response, $args){
 });
 
 $app->get('/questions/{type}/all', function($request, $response, $args) {
-
-  return $response->withJson(getQuestions($args['type']));
-
+  $type = $args['type'];
+  return $response->withJson(getQuestions($type));
 });
 
 
